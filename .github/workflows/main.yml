@@ -1,16 +1,20 @@
 name: Mirroring
 
-on: [ push, delete ]
+on:
+  push:
+    branches: [main]
 
 jobs:
   to_codecommit:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
           target_repo_url:
-            ssh://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/test>
+            ssh://git-codecommit.~~~~（**ssh://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/test）**
           ssh_private_key:
             ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY }}
           ssh_username:
